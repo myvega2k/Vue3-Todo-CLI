@@ -1,12 +1,13 @@
 <template>
     <div>
         <input type="text" :value="newTodoItem" @input="handleInput">
-        <button>추가</button>
+        <!-- <input type="text" v-model="newTodoItem"> -->
+        <button @click="addTodo">추가</button>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
 
 const newTodoItem = ref("")
 
@@ -17,6 +18,11 @@ const handleInput = (event: Event) => {
     if (!todoText) return
     emit("input:todo", todoText)
     newTodoItem.value = todoText
+}
+const addTodo = () => {
+    const todoItem = newTodoItem.value
+    localStorage.setItem(todoItem, todoItem)
+    newTodoItem.value = ""
 }
 
 
