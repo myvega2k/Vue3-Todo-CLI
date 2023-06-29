@@ -24,11 +24,10 @@ const props = defineProps({
                  required: true }
 })
 
-const todoItems = ref<TodoItem[]>([])
+const emit = defineEmits(["remove:todo"])
 
 const removeTodo = (todoItemStr: string, index: number) => {
-    localStorage.removeItem(todoItemStr)
-    todoItems.value.splice(index, 1)
+    emit('remove:todo', todoItemStr, index)    
 }
 
 const toggleComplete = (todoItem: TodoItem) => {
