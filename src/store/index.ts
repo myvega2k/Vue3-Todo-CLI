@@ -15,13 +15,19 @@ const storage = {
     }
     return arr;
   },
-}
+};
 
 export type State = { todoItems: TodoItem[] };
 const state: State = { todoItems: storage.fetch() };
 
 export const store = createStore({
-    plugins: process.env.NODE_ENV === "development" ? [createLogger()] : [],
-    state, //state: state,
-    
+  plugins: process.env.NODE_ENV === "development" ? [createLogger()] : [],
+  state, //state: state,
+  mutations: {
+    addTodo(state: State, todoItem: string) {
+      const obj: TodoItem = { completed: false, item: todoItem };
+      localStorage.setItem(todoItem, JSON.stringify(obj));
+      state.todoItems.push(obj);
+    },
+  },
 });
