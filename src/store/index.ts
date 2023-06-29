@@ -37,7 +37,7 @@ export const store = createStore({
       localStorage.removeItem(item);
       state.todoItems.splice(index, 1);
     },
-    toggleTodo(state, payload) {
+    toggleTodo(state: State, payload) {
       const {
         todoItem: { item, completed },
         index,
