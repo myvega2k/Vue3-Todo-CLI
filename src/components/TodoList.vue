@@ -1,9 +1,9 @@
 <template>
     <div>
         <ul>
-            <li v-for="(item, idx) in todoItems" :key="idx">
-                {{ item }}
-                <span class="removeBtn" @click="removeTodo(item, idx)">
+            <li v-for="(todoItem, idx) in todoItems" :key="idx">
+                {{ todoItem.item }}
+                <span class="removeBtn" @click="removeTodo(todoItem.item, idx)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
 
@@ -14,16 +14,18 @@
 </template>
 
 <script setup lang="ts">
+import TodoItem from '@/types/TodoItem';
 import { ref, onBeforeMount } from 'vue'
 
-const todoItems = ref<string[]>([])
+const todoItems = ref<TodoItem[]>([])
 
 //life cycle hook
 onBeforeMount(() => {
     if (localStorage.length > 0) {
         for (var i = 0; i < localStorage.length; i++) {
-            const storageValue = localStorage.key(i) as string
-            todoItems.value.push(storageValue)
+            const storageKey = localStorage.key(i) as string
+            const itemJson = localStorage.getItem(storageKey);
+            todoItems.value.push(JSON.parse(itemJson as string));
         }
     }
     console.log(todoItems.value)
