@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import TodoItem from '@/types/TodoItem';
-import { PropType, ref } from 'vue'
+import { PropType } from 'vue'
 
 const props = defineProps({
     propsData: { type: Array as PropType<TodoItem[]>, 

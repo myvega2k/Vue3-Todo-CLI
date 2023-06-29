@@ -8,9 +8,10 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    setup() {
+    emits: ['clear:todo'],
+    setup(props, {emit}) {
         const clearTodo = () => {
-            localStorage.clear()
+            emit('clear:todo')
         }
 
         return {clearTodo}
