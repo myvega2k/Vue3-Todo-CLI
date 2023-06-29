@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts" setup>
+import TodoItem from '@/types/TodoItem';
 import { ref } from 'vue'
 
 const newTodoItem = ref("")
@@ -24,7 +25,8 @@ const handleInput = (event: Event) => {
 const addTodo = () => {
     const todoItem = newTodoItem.value
     if (todoItem !== "") {
-        localStorage.setItem(todoItem, todoItem)
+        const todoItemObj: TodoItem = {completed: false, item:todoItem}
+        localStorage.setItem(todoItem, JSON.stringify(todoItemObj))
         clearInput()
     }
 }
