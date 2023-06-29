@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList :props-data="todoItems" @add:todo="addTodo"></TodoList>
+    <TodoInput @add:todo="addTodo"></TodoInput>
+    <TodoList :props-data="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
