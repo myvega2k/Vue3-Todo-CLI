@@ -5,16 +5,29 @@
         <span class="addContainer" @click="addTodo">
             <i class="fas fa-plus addBtn"></i>
         </span>
+        <MyModal v-show="showModal" @close="showModal = false">
+            <template v-slot:header>
+                <h3>
+                    경고!
+                    <i class="closeModalBtn fas fa-times" @click="showModal = false"></i>
+                </h3>
+            </template>
+            <template v-slot:body>
+                <div>아무것도 입력하지 않으셨습니다.</div>
+            </template>
+        </MyModal>
     </div>
 </template>
 
 <script lang="ts" setup>
-import TodoItem from '@/types/TodoItem';
 import { ref } from 'vue'
+import MyModal from './common/MyModal.vue'
+
+const showModal = ref(false)
 
 const newTodoItem = ref("")
 
-const emit = defineEmits(["input:todo","add:todo"])
+const emit = defineEmits(["input:todo", "add:todo"])
 
 const handleInput = (event: Event) => {
     const todoText = (event.target as HTMLInputElement).value
@@ -27,7 +40,10 @@ const addTodo = () => {
     if (todoItem !== "") {
         emit('add:todo', todoItem)
         clearInput()
+    } else {
+        showModal.value = !showModal.value
     }
+
 }
 const clearInput = () => {
     newTodoItem.value = ""
@@ -36,9 +52,11 @@ const clearInput = () => {
 </script>
 
 <style scoped>
-i,span {
+i,
+span {
     cursor: pointer;
 }
+
 input:focus {
     outline: none;
 }
@@ -67,4 +85,9 @@ input:focus {
 .addBtn {
     color: white;
     vertical-align: middle;
-}</style>
+}
+
+.closeModalBtn {
+    color: #42b983;
+}
+</style>
