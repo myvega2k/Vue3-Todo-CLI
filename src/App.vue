@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
-    <TodoList :props-data="todoItems" @remove:todo="removeTodo" @toggle:todo="toggleTodo">
+    <TodoList @remove:todo="removeTodo" @toggle:todo="toggleTodo">
     </TodoList>
     <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
