@@ -34,6 +34,14 @@ export const store = createStore({
           commit("setTodoItems", items);
         });
     },
+    addTodo({ commit }, payload: TodoItem) {
+      http
+        .post(`/todos`, payload)
+        .then((r) => r.data)
+        .then((items) => {
+          commit("setTodoItems", items);
+        });
+    },
   },
   mutations: {
     setTodoItems(state, items) {
