@@ -44,7 +44,7 @@ const addTodo = () => {
     const todoItem = newTodoItem.value
     if (todoItem !== "") {
         const itemObj: TodoItem = { completed: false, item: todoItem } 
-        store.dispatch("addTodo", itemObj)
+        store.dispatch("moduleTodo/addTodo", itemObj)
         clearInput()
     } else {
         showModal.value = !showModal.value
