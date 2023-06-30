@@ -3,8 +3,8 @@ import { modulePost, ModulePostState } from "./modules/modulePost";
 import { moduleTodo, ModuleTodoState } from "./modules/moduleTodo";
 
 export interface RootState {
-  moduleTodo: ModuleTodoState;
-  modulePost: ModulePostState;
+  moduleTodo: ModuleTodoState
+  modulePost: ModulePostState
 }
 
 export const store = createStore({
