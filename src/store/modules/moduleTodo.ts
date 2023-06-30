@@ -67,12 +67,12 @@ export const moduleTodo: Module<ModuleTodoState, RootState> = {
     setTodoItems(state, items) {
         state.todoItems = items;
       },
-      addTodo(state: State, todoItem: string) {
+      addTodo(state: ModuleTodoState, todoItem: string) {
         const obj: TodoItem = { completed: false, item: todoItem };
         localStorage.setItem(todoItem, JSON.stringify(obj));
         state.todoItems.push(obj);
       },
-      removeTodo(state: State, payload) {
+      removeTodo(state: ModuleTodoState, payload) {
         const {
           todoItem: { item },
           index,
@@ -80,7 +80,7 @@ export const moduleTodo: Module<ModuleTodoState, RootState> = {
         localStorage.removeItem(item);
         state.todoItems.splice(index, 1);
       },
-      toggleTodo(state: State, payload) {
+      toggleTodo(state: ModuleTodoState, payload) {
         const {
           todoItem: { item, completed },
           index,
@@ -89,7 +89,7 @@ export const moduleTodo: Module<ModuleTodoState, RootState> = {
         localStorage.removeItem(item);
         localStorage.setItem(item, JSON.stringify(state.todoItems[index]));
       },
-      clearTodo(state: State) {
+      clearTodo(state: ModuleTodoState) {
         localStorage.clear();
         state.todoItems = [];
       },
