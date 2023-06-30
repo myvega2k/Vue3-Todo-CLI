@@ -1,6 +1,7 @@
 import { createStore, createLogger } from "vuex";
 import TodoItem from "@/types/TodoItem";
 import http from "@/common/http-common";
+import axios from "axios";
 
 export type State = { todoItems: TodoItem[] };
 const state: State = { todoItems: [] };
@@ -8,7 +9,23 @@ const state: State = { todoItems: [] };
 export const store = createStore({
   plugins: process.env.NODE_ENV === "development" ? [createLogger()] : [],
   state, //state: state,
-  actions: {},
+  actions: {
+    loadTodoItems({ commit }) {
+      http
+        .get("/todos")
+        .then((r) => r.data)
+        .then((items) => {
+          commit("setTodoItems", items);
+        })
+        .catch((error) => {
+          if (axios.isAxiosError(error)) {
+            console.log(error?.response?.status + " : " + error.message);
+          } else {
+            console.error(error);
+          }
+        });
+    },
+  },
   mutations: {
     setTodoItems(state, items) {
       state.todoItems = items;
