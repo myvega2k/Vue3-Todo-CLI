@@ -18,8 +18,9 @@ export const store = createStore({
           commit("setTodoItems", items);
         })
         .catch((error) => {
+          console.log(error);
           if (axios.isAxiosError(error)) {
-            console.log(error?.response?.status + " : " + error.message);
+            console.error(error?.response?.status + " : " + error.message);
           } else {
             console.error(error);
           }
