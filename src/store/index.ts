@@ -26,6 +26,14 @@ export const store = createStore({
           }
         });
     },
+    removeTodo({ commit }, payload: TodoItem) {
+      http
+        .delete(`/todos/${payload.id}`)
+        .then((r) => r.data)
+        .then((items) => {
+          commit("setTodoItems", items);
+        });
+    },
   },
   mutations: {
     setTodoItems(state, items) {
