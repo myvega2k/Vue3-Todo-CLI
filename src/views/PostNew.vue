@@ -21,6 +21,7 @@ const router = useRouter()
 const isSaving = ref(false)
 const inputTxt = ref('')
 const emit = defineEmits(["input:post"])
+
 const btnTxt = computed(() => isSaving.value ? 'Saving...' : 'Save')
 const disabled = computed(() => isSaving.value)
 
